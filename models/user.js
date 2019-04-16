@@ -27,11 +27,6 @@ city : {
   required : true
 },
 
-selectOption : {
-  type : String,
-  required : true
-},
-
 zipCode : {
   type : String,
   required : true
@@ -39,4 +34,4 @@ zipCode : {
 
 });
 
-module.exports = User = mongoose.model('User',UserSchema);
+module.exports = User1 = mongoose.model('User1',UserSchema);

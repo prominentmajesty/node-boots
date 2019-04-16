@@ -1,12 +1,13 @@
-var express = require('express');
+  var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var flash = require('connect-flash-plus');
 
-var index = require('./routes/index');
+
 var user = require('./routes/user');
 var {config} = require('./database/mongoose');
 
@@ -38,10 +39,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(session({secret: 'krunal', saveUninitialized: false, resave: false}));
+app.use(session({secret: 'majesty', saveUninitialized: true, resave: false}));
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
+app.get('/', function(req,res){
+    res.render('home',{
+      title : 'Home',
+      style : 'homecss.css',
+      script : 'homescript.js'
+    });
+});
 
-app.use('/', index);
 app.use('/user',user);
 
 app.listen(PORT, ()=>{

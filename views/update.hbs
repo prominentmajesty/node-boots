@@ -1,0 +1,54 @@
+{{> header}}
+<session>
+  <div class="container" style="margin-bottom : 22px">
+    {{# if errors}}
+       <div class = "col">
+         {{# each errors}}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{this.msg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+        {{# if error_msg}}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{error_msg}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {{/if}}
+      {{# if success_msg}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{success_msg}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       {{/if}}
+       <form id = "myform" method="post" action="/user/update">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" id="inputPassword5" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword5" placeholder="Password">
+          </div>
+          <div class="form-group" style="margin-top : 23px">
+            <label for="exampleInputEmail1">Enter New Password :</label>
+            <input type="password" name="newPassword" class="form-control" id="inputPassword5" aria-describedby="emailHelp" placeholder="Enter New Password">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Re-enter New Password :</label>
+            <input type="password" name="renterNewPassword" class="form-control" id="inputPassword5" placeholder="Re-Enter New Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Change Password</button>
+        </form>
+      </div>
+</session>
+  {{> footer}}
