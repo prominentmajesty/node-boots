@@ -2,14 +2,22 @@
   <div class="container">
     <fieldset>
       <legend>Log In</legend>
-      <form>
+      <form method="post" action="/user/signIn">
+        {{# if error}}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {{/if}}
           <div class="form-col">
             <div class="col">
-            <i class="fa fa-user-friends" style="font-size: 30px !important;"></i><input type="text" class="form-control" placeholder="UserName">
+            <i class="fa fa-user-friends" style="font-size: 30px !important;"></i><input type="text" name = "userName" class="form-control" placeholder="UserName">
             </div>
             <br>
             <div class="col">
-              <i class="fa fa-user-lock" style="font-size: 30px !important;"></i><input type="text" class="form-control" placeholder="Password">
+              <i class="fa fa-user-lock" style="font-size: 30px !important;"></i><input type="text" class="form-control" name="password" placeholder="Password">
             </div>
             <br>
              <button type="submit" class="btn btn-primary">Sign In</button>

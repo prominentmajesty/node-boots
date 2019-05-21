@@ -2,7 +2,8 @@ var express = require('express');
 var User1 = require('../models/user');
 var bcrypt = require('bcryptjs');
 var _ = require('lodash');
-var {ObjectID} = require('mongodb');
+//var {ObjectID} = require('mongodb');
+var passport = require('passport');
 //const Unsplash = require('unsplash-js').default
 
 var router = express.Router();
@@ -100,7 +101,7 @@ var router = express.Router();
                   user.save((err,doc)=>{
                     var mail = doc.email;
                     var IDD = doc._id;
-                    req.flash('success_msg',`Registration Completed, Your Email is : ${mail} And Your ID is : ${IDD}`);
+                     req.flash('success_msg',`Registration Completed, Your Email is : ${mail} And Your ID is : ${IDD}`);
                     res.redirect('/user/signup');
                   });
                 }
@@ -232,5 +233,14 @@ var router = express.Router();
         });
       }
   });
+ 
+  router.post('/signIn',(req,res,next)=>{
+    passport.authenticate('user',{
+      successRedirect:'/user/dashbord',
+      failureRedirect:'/user/login',
+      failureFlash:true
+    })(req,res,next);
+  });
 
 module.exports = router;
+ 
